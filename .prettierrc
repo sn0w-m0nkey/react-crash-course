@@ -2,6 +2,7 @@
   "tabWidth": 2,
   "useTabs": false,
 
+  "formatOnSave": true,
   "trailingComma": "es5",
   "semi": false,
   "singleQuote": true
