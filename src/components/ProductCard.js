@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import styles from './ProductCard.module.css'
 
-export function ProductCard({ product, onPurchase, background = 'slategray' }) {
+export function ProductCard({
+  product,
+  isFavorite,
+  background = 'slategray',
+  onPurchase,
+  onFavorite,
+}) {
   const [stockCount, setStockCount] = useState(product.stockCount)
   const [showMore, setShowMore] = useState(false)
 
@@ -18,6 +24,12 @@ export function ProductCard({ product, onPurchase, background = 'slategray' }) {
 
   return (
     <article className={styles.Container} style={{ background }}>
+      <button
+        className={styles.Favorite}
+        onClick={() => onFavorite(product.id)}
+      >
+        {isFavorite ? '❤️' : '🤍'}
+      </button>
       <h2>{product.title}</h2>
       <img src={product.imgSrc} alt={product.title} width={128} height={128} />
 
