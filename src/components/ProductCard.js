@@ -8,18 +8,19 @@ export function ProductCard({
   onPurchase,
   onFavorite,
 }) {
-  const [stockCount, setStockCount] = useState(product.stockCount)
+  // const [stockCount, setStockCount] = useState(product.stockCount)
   const [showMore, setShowMore] = useState(false)
 
   function handleClick() {
-    setStockCount((prevStockCount) => prevStockCount - 1)
-    onPurchase(product)
+    // ((prevStockCount) => prevStockCount - 1)
+    onPurchase(product.id, product.stockCount - 1)
   }
 
   function handleTwoClicks() {
     // Call setStockCount twice, using functional update to ensure both are applied correctly
-    setStockCount((prevStockCount) => prevStockCount - 1)
-    setStockCount((prevStockCount) => prevStockCount - 1)
+    // ((prevStockCount) => prevStockCount - 1)
+    // ((prevStockCount) => prevStockCount - 1)
+    onPurchase(product.id, product.stockCount - 2)
   }
 
   return (
@@ -42,24 +43,26 @@ export function ProductCard({
       <p>Specification:</p>
       {showMore && (
         <ul className={styles.Specification}>
-          {product.specificiation.map((spec, index) => (
+          {product.specification.map((spec, index) => (
             <li key={index}>{spec}</li>
           ))}
         </ul>
       )}
-      <Status stockCount={stockCount} />
+      <Status stockCount={product.stockCount} />
       {/* {stockCount > 0 && (
         <button onClick={() => onPurchase(product)}>
           Buy (From ${product.price})
         </button>
       )} */}
-      {stockCount > 0 && (
+      {product.stockCount > 0 && (
         <>
           <p>Price: ${product.price}</p>
           <button onClick={handleClick}>Buy</button>
         </>
       )}
-      {stockCount > 1 && <button onClick={handleTwoClicks}>Buy 2</button>}
+      {product.stockCount > 1 && (
+        <button onClick={handleTwoClicks}>Buy 2</button>
+      )}
     </article>
   )
 }
